@@ -27,8 +27,9 @@ reqs = [
     'tensorflow',
 	'tensorboard>=1.8.0',
 	'keras',
-        'matplotlib',
+    'matplotlib',
 	'numpy',
+    'pillow',
 ]
 
 extras = {
