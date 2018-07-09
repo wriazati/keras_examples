@@ -27,6 +27,7 @@ reqs = [
     'tensorflow',
 	'tensorboard>=1.8.0',
 	'keras',
+        'matplotlib',
 	'numpy',
 ]
 
