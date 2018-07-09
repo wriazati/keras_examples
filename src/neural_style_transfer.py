@@ -296,12 +296,12 @@ for i in range(iterations):
     call(["mv", fname, args.output_dir])
 
 ## Save base images
-img = deprocess_image(preprocess_image(style_reference_image_path))
-fname = result_prefix + '_%s.png' % ".style"
+img = load_img(base_image_path, target_size=(img_nrows, img_ncols))
+fname = result_prefix + '_%s.png' % "..style"
 save_img(fname, img)
 call(["mv", fname, args.output_dir])
 
-img = deprocess_image(base_image_path)
-fname = result_prefix + '_%s.png' % "base"
+img = load_img(style_reference_image_path, target_size=(img_nrows, img_ncols))
+fname = result_prefix + '_%s.png' % ".base"
 save_img(fname, img)
 call(["mv", fname, args.output_dir])
