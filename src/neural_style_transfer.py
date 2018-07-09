@@ -56,6 +56,7 @@ from scipy.optimize import fmin_l_bfgs_b
 import time
 import argparse
 from subprocess import call
+from matplotlib import pyplot as plt
 
 from keras.applications import vgg19
 from keras import backend as K
@@ -91,7 +92,7 @@ content_weight = args.content_weight
 
 # dimensions of the generated picture.
 width, height = load_img(base_image_path).size
-img_nrows = 400
+img_nrows = 100
 img_ncols = int(width * img_nrows / height)
 
 # util function to open, resize and format pictures into appropriate tensors
@@ -99,6 +100,8 @@ img_ncols = int(width * img_nrows / height)
 
 def preprocess_image(image_path):
     img = load_img(image_path, target_size=(img_nrows, img_ncols))
+    # plt.imshow(img)
+    # plt.show()
     img = img_to_array(img)
     img = np.expand_dims(img, axis=0)
     img = vgg19.preprocess_input(img)
@@ -292,3 +295,13 @@ for i in range(iterations):
     print('Iteration %d completed in %ds' % (i, end_time - start_time))
     call(["mv", fname, args.output_dir])
 
+## Save base images
+img = deprocess_image(preprocess_image(style_reference_image_path))
+fname = result_prefix + '_%s.png' % ".style"
+save_img(fname, img)
+call(["mv", fname, args.output_dir])
+
+img = deprocess_image(base_image_path)
+fname = result_prefix + '_%s.png' % "base"
+save_img(fname, img)
+call(["mv", fname, args.output_dir])
